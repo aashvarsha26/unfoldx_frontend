@@ -21,6 +21,14 @@ the UI is fully demoable before the backend WebSocket endpoint exists. Flip
 endpoint once it's up — no component changes needed, the mock and the real
 socket feed the exact same code path.
 
+## Deploy to GitHub Pages
+
+The `main` branch deploys automatically through `.github/workflows/deploy-pages.yml`.
+In the repository settings, open **Pages** and set **Source** to **GitHub Actions**.
+After the workflow completes, the site is available at:
+
+https://aashvarsha26.github.io/unfoldx_frontend/
+
 ## The contract with the backend
 
 This is the part that has to match exactly for the two halves of the project

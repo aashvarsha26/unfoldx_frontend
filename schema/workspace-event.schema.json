@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WorkspaceEvent",
+  "description": "One frame sent over the workspace WebSocket. Every agent action, routing decision, budget change, and handoff is one of these, appended to the hash-chained provenance log.",
+  "type": "object",
+  "required": ["id", "workspace_id", "provider", "event_type", "timestamp", "prev_hash", "hash", "payload"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "workspace_id": { "type": "string" },
+    "task_id": { "type": ["string", "null"] },
+    "subtask_id": { "type": ["string", "null"] },
+    "agent_id": { "type": ["string", "null"] },
+    "provider": {
+      "type": "string",
+      "enum": ["bob", "claude_code", "codex", "gemini", "system"]
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "provider_connected",
+        "task_submitted",
+        "plan_decomposed",
+        "route_decided",
+        "conflict_checked",
+        "conflict_detected",
+        "dispatch_started",
+        "log_line",
+        "budget_update",
+        "circuit_breaker_triggered",
+        "handoff_emitted",
+        "authorization_denied",
+        "task_completed",
+        "error"
+      ]
+    },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "prev_hash": {
+      "type": "string",
+      "description": "Hash of the previous event in this workspace's chain. Empty string for the first event."
+    },
+    "hash": {
+      "type": "string",
+      "description": "Hash of this event, e.g. sha256(id + prev_hash + canonical_json(payload))."
+    },
+    "payload": {
+      "type": "object",
+      "description": "Shape depends on event_type — see README.md for the field expected per type."
+    },
+    "cost_delta": { "type": "number" },
+    "tokens_delta": { "type": "number" }
+  }
+}

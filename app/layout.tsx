@@ -17,7 +17,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Universal AI Workspace — Event Ledger",
+  title: "UnfoldX",
   description:
     "Live, hash-chained event feed for a workspace's connected AI agents.",
 };

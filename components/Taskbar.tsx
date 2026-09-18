@@ -8,6 +8,7 @@ import { readFiles } from "@/lib/attachments";
 import { FileChips } from "./FileChips";
 
 const LOGO_ORDER: Provider[] = ["bob", "claude_code", "codex", "gemini"];
+const ASSET_BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 interface LogoSpec {
   label: string;
@@ -54,7 +55,7 @@ function LogoButton({
       >
         {spec.img ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={spec.img} alt={spec.label} className="h-full w-full object-cover" />
+          <img src={`${ASSET_BASE_PATH}${spec.img}`} alt={spec.label} className="h-full w-full object-cover" />
         ) : (
           <span className="font-mono text-xs font-semibold uppercase" style={{ color: accent }}>
             {spec.mono}

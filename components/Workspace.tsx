@@ -75,24 +75,17 @@ export function Workspace() {
       </section>
 
       <div className="grid flex-1 grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
-        <section className="relative h-[72vh] min-h-[580px] overflow-hidden rounded-xl border border-ink-700 bg-ink-950">
-          <HubCanvas model={hub} onAction={send} />
-          <Taskbar
-            onAction={send}
-            addedCount={hub.agents.filter((a) => !a.builtIn).length}
-          />
-        </section>
-
-        <aside className="flex min-w-0 flex-col gap-4 pb-1">
-          <LivePreview />
-
-          <section>
-            <h2 className="mb-2 text-sm font-medium text-muted">Event chain</h2>
-            <EventFeed events={events} />
+        <div className="flex min-w-0 flex-col gap-4">
+          <section className="relative h-[72vh] min-h-[580px] overflow-hidden rounded-xl border border-ink-700 bg-ink-950">
+            <HubCanvas model={hub} onAction={send} />
+            <Taskbar
+              onAction={send}
+              addedCount={hub.agents.filter((a) => !a.builtIn).length}
+            />
           </section>
 
-          <div className="grid grid-cols-1 gap-3">
-            <div className="rounded-md border border-ink-700 bg-ink-900 p-3">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <section className="rounded-md border border-ink-700 bg-ink-900 p-3">
               <h3 className="mb-2 text-xs font-medium text-muted">Connectors</h3>
               <p className="mb-2 text-[11px] text-muted/60">
                 Drag the <span className="text-ledger-violet">⊕</span> on a node&apos;s right edge onto another
@@ -120,9 +113,9 @@ export function Workspace() {
                   ))}
                 </ul>
               )}
-            </div>
+            </section>
 
-            <div className="rounded-md border border-ink-700 bg-ink-900 p-3">
+            <section className="rounded-md border border-ink-700 bg-ink-900 p-3">
               <h3 className="mb-2 text-xs font-medium text-muted">Recent controls</h3>
               {recentQueue.length === 0 ? (
                 <p className="text-[11px] text-muted/60">Nothing yet — prompt an agent or route a command.</p>
@@ -138,8 +131,18 @@ export function Workspace() {
                   ))}
                 </ul>
               )}
-            </div>
+            </section>
           </div>
+        </div>
+
+        <aside className="flex min-w-0 flex-col gap-4 pb-1">
+          <LivePreview />
+
+          <section>
+            <h2 className="mb-2 text-sm font-medium text-muted">Event chain</h2>
+            <EventFeed events={events} />
+          </section>
+
         </aside>
       </div>
     </main>
